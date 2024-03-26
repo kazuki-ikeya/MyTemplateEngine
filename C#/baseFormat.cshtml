@@ -1,0 +1,23 @@
+
+using System;
+
+namespace entities
+{
+    
+    /// <summary>
+    /// @Model.TableName
+    /// </summary>
+    public partial class @Model.TableNamePascal
+    {
+
+	    @foreach (var entity in Model.Entities)
+	    {
+            var tempEntityCodes = new List<string>();
+            tempEntityCodes.Add($"        [JsonProperty(\"{@entity.LogicalName}\")]");
+            tempEntityCodes.Add($"        public {@entity.TypeName} {@entity.LogicalNamePascal} {{ get; set; }}");
+            tempEntityCodes.Add($"");
+ 
+            @(string.Join("\r\n", tempEntityCodes) + "\r\n")
+	    }
+    }
+}
